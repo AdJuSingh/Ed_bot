@@ -1,0 +1,32 @@
+version: "3.0"
+intents:
+  - greet
+  - goodbye
+  - ask_ai_concepts
+  - ask_ml_concepts
+  - ask_algorithms
+  - ask_use_cases
+  - ask_advanced_topics
+  - thank_you
+
+entities:
+  - topic
+
+slots:
+  topic:
+    type: text
+
+responses:
+  utter_greet:
+    - text: "Hello! I'm here to help you learn AI and ML. What would you like to know?"
+  utter_goodbye:
+    - text: "Goodbye! Keep learning and exploring AI/ML!"
+  utter_thank_you:
+    - text: "You're welcome! Feel free to ask more questions anytime."
+
+actions:
+  - action_provide_ai_info
+  - action_provide_ml_info
+  - action_provide_algorithm_info
+  - action_provide_use_cases
+  - action_provide_advanced_topics

@@ -1,0 +1,64 @@
+version: "3.0"
+nlu:
+  - intent: greet
+    examples: |
+      - Hi
+      - Hello
+      - Hey there
+      - Greetings
+      - Hi bot
+
+  - intent: goodbye
+    examples: |
+      - Bye
+      - Goodbye
+      - See you later
+      - Take care
+      - Talk to you soon
+
+  - intent: ask_ai_concepts
+    examples: |
+      - What is Artificial Intelligence?
+      - Can you explain AI?
+      - How does AI work?
+      - What are the components of AI?
+      - Difference between AI and traditional programming
+
+  - intent: ask_ml_concepts
+    examples: |
+      - What is Machine Learning?
+      - Explain supervised learning
+      - What is unsupervised learning?
+      - How does reinforcement learning work?
+      - Can you describe feature engineering?
+
+  - intent: ask_algorithms
+    examples: |
+      - What are decision trees?
+      - Explain neural networks
+      - What is K-Nearest Neighbors?
+      - How does a support vector machine work?
+      - What are ensemble methods?
+
+  - intent: ask_use_cases
+    examples: |
+      - What are AI use cases in healthcare?
+      - How is AI used in finance?
+      - Explain AI in autonomous vehicles
+      - What are some examples of ML in e-commerce?
+      - How is deep learning applied in image recognition?
+
+  - intent: ask_advanced_topics
+    examples: |
+      - What is transfer learning?
+      - Explain natural language processing
+      - How do GANs work?
+      - What is reinforcement learning in detail?
+      - Can you describe the transformer architecture?
+
+  - intent: thank_you
+    examples: |
+      - Thanks
+      - Thank you
+      - I appreciate it
+      - Thanks for the help

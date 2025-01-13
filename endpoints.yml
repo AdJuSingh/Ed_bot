@@ -1,0 +1,15 @@
+# Configuration for Rasa Core's server endpoints.
+
+models:
+  url: http://localhost:5005/model
+
+action_endpoint:
+  url: "http://localhost:5055/webhook"
+
+tracker_store:
+  type: sql
+  dialect: "sqlite"  # dialect can be 'postgresql', 'mysql', or 'sqlite'
+  db: "rasa.db"      # path to your database
+  username: ""
+  password: ""
+  url: ""
