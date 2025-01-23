@@ -20,7 +20,7 @@ Integration-Ready: Easily integrates with platforms like Telegram, Slack, or cus
 # Steps:
 
   Clone the Repository:
-     git clone https://github.com/Thrinadh-13/Chatbot_for_Personalized_Learning  
+     git clone(https://github.com/AdJuSingh/Ed_bot.git) 
      
   Navigate to the Project Directory:
 
