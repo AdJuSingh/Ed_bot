@@ -38,19 +38,17 @@ Integration-Ready: Easily integrates with platforms like Telegram, Slack, or cus
 # Training the Model
 Modify the nlu.yml, stories.yml, and domain.yml files as needed.
 Train the model using cmd:
-   rasa train  
+     rasa train  
 The trained model will be saved in the models/ directory.
 
 Running the Chatbot
 On the Command Line:
 Run the chatbot interactively:
-
-   rasa shell  
+     rasa shell  
    
 As a Server:
 Run the chatbot as a server:
-
-   rasa run  
+     rasa run  
    
 # Files and Directories
 data/: Contains training data for intents and stories.
