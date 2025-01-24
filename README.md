@@ -46,18 +46,24 @@ The trained model will be saved in the models/ directory.
 
 Running the Chatbot
 On the Command Line:
+
 Run the chatbot interactively:
      rasa shell  
    
 As a Server:
+
 Run the chatbot as a server:
      rasa run  
    
 # Files and Directories
 data: Contains training data for intents and stories.
+
 domain.yml: Defines intents, entities, actions, and responses.
+
 models: Stores trained models.
+
 actions: Holds custom action scripts.
+
 config.yml: Specifies the pipeline and policies used for the chatbot.
 
 # Future Enhancements
