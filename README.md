@@ -6,8 +6,11 @@ This project is a conversational AI chatbot built using Rasa Open Source, design
 
 # Features
 Custom-Trained Model: Leverages machine learning to interpret user intents and extract relevant entities.
+
 Domain-Specific Expertise: Tailored specifically for the AI and machine learning educational domain.
+
 Multi-Intent Handling: Processes and responds to complex, multi-layered queries effectively.
+
 Integration-Ready: Easily integrates with platforms like Telegram, Slack, or custom websites.
 
 # Installation
