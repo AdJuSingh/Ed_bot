@@ -204,3 +204,102 @@ if st.button("Send") and user_input:
 # Display updated chat
 display_chat()
 
+
+# Sidebar dropdown menu for topic selection
+topic = st.sidebar.selectbox(
+    "Select a topic to get book recommendations:",
+    ["Select a topic", "AI", "Machine Learning", "Deep Learning", "Data Science", "NLP"]
+)
+
+# Dictionary with book recommendations for each topic
+book_recommendations = {
+    "AI": [
+        "1. Artificial Intelligence: A Modern Approach by Stuart Russell and Peter Norvig",
+        "2. Superintelligence: Paths, Dangers, Strategies by Nick Bostrom",
+        "3. The Age of Em: Work, Love, and Life when Robots Rule the Earth by Robin Hanson"
+    ],
+    "Machine Learning": [
+        "1. Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow by Aurélien Géron",
+        "2. Pattern Recognition and Machine Learning by Christopher Bishop",
+        "3. Machine Learning Yearning by Andrew Ng"
+    ],
+    "Deep Learning": [
+        "1. Deep Learning by Ian Goodfellow, Yoshua Bengio, and Aaron Courville",
+        "2. Neural Networks and Deep Learning by Michael Nielsen",
+        "3. Deep Reinforcement Learning Hands-On by Maxim Lapan"
+    ],
+    "Data Science": [
+        "1. Data Science for Business by Foster Provost and Tom Fawcett",
+        "2. Python Data Science Handbook by Jake VanderPlas",
+        "3. Practical Data Science with R by Nina Zumel and John Mount"
+    ],
+    "NLP": [
+        "1. Speech and Language Processing by Daniel Jurafsky and James H. Martin",
+        "2. Natural Language Processing with Python by Steven Bird, Ewan Klein, and Edward Loper",
+        "3. Transformers for Natural Language Processing by Denis Rothman"
+    ]
+}
+
+# Display book recommendations based on the selected topic in the sidebar
+if topic != "Select a topic":
+    st.sidebar.write(f"### Book Recommendations for {topic}:")
+    for book in book_recommendations.get(topic, []):
+        st.sidebar.write(book)
+
+import csv
+
+# Create a container for the feedback buttons at the bottom-right corner
+st.markdown("""
+    <style>
+    .feedback-container {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        z-index: 100;
+    }
+    .feedback-button {
+        background-color: #ff9a9e;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 18px;
+        color: white;
+        transition: background-color 0.3s;
+    }
+    .feedback-button:hover {
+        background-color: #ff5e62;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
+# Function to save feedback to a CSV file
+def save_feedback(feedback):
+    # Open the CSV file in append mode to add new feedback
+    with open("feedback.csv", mode='a', newline='') as file:
+        writer = csv.writer(file)
+        # Write only the feedback (no timestamp)
+        writer.writerow([feedback])
+
+
+# Display feedback buttons
+with st.container():
+    st.markdown('<div class="feedback-container">', unsafe_allow_html=True)
+
+    # Positive feedback button (Thumbs Up)
+    if st.button("👍", key="positive_feedback", help="Thumbs Up - Positive Feedback"):
+        save_feedback("positive")  # Save only "positive" to CSV
+        st.write("Thank you for your positive feedback!")
+
+    # Negative feedback button (Thumbs Down)
+    if st.button("👎", key="negative_feedback", help="Thumbs Down - Negative Feedback"):
+        save_feedback("negative")  # Save only "negative" to CSV
+        st.write("Sorry to hear that! We appreciate your feedback.")
+
+    st.markdown('</div>', unsafe_allow_html=True)
