@@ -159,8 +159,6 @@ st.sidebar.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Floating Help Button
-st.markdown('<div class="floating-btn">❓</div>', unsafe_allow_html=True)
 
 # Main Page Header
 st.title("Welcome to LearnAI! 🤖")
@@ -248,45 +246,43 @@ if topic != "Select a topic":
 
 import csv
 
-# Create a container for the feedback buttons at the bottom-right corner
-st.markdown("""
-    <style>
-    .feedback-container {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        z-index: 100;
-    }
-    .feedback-button {
-        background-color: #ff9a9e;
-        border: none;
-        border-radius: 20px;
-        padding: 10px 20px;
-        cursor: pointer;
-        font-weight: bold;
-        font-size: 18px;
-        color: white;
-        transition: background-color 0.3s;
-    }
-    .feedback-button:hover {
-        background-color: #ff5e62;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-
 # Function to save feedback to a CSV file
-def save_feedback(feedback):
+def save_feedback(serial_no, user_input, bot_output, feedback):
     # Open the CSV file in append mode to add new feedback
     with open("feedback.csv", mode='a', newline='') as file:
         writer = csv.writer(file)
-        # Write only the feedback (no timestamp)
-        writer.writerow([feedback])
+        # Write serial number, user input, bot output, and feedback to CSV
+        writer.writerow([serial_no, user_input, bot_output, feedback])
 
+# Determine the next serial number for the entry
+def get_next_serial_no():
+    try:
+        with open("feedback.csv", mode='r') as file:
+            rows = list(csv.reader(file))
+            if rows:
+                # Find the most recent serial number and increment it
+                for row in reversed(rows):
+                    try:
+                        # Try to convert the first column to an integer
+                        serial_no = int(row[0])
+                        return serial_no + 1
+                    except ValueError:
+                        # Skip invalid rows where the first column isn't an integer
+                        continue
+            else:
+                # If no rows are present, start with serial number 1
+                return 1
+    except FileNotFoundError:
+        # If the file doesn't exist, start with serial number 1
+        return 1
+
+# Determine the next serial number
+serial_no = get_next_serial_no()
+
+# Fetch the most recent user input and bot output from the session state
+if st.session_state["messages"]:
+    user_input = st.session_state["messages"][-1]["text"]
+    bot_output = st.session_state["messages"][-2]["text"] if len(st.session_state["messages"]) > 1 else "No response yet"
 
 # Display feedback buttons
 with st.container():
@@ -294,12 +290,13 @@ with st.container():
 
     # Positive feedback button (Thumbs Up)
     if st.button("👍", key="positive_feedback", help="Thumbs Up - Positive Feedback"):
-        save_feedback("positive")  # Save only "positive" to CSV
+        save_feedback(serial_no, user_input, bot_output, "positive")  # Save the data to CSV
         st.write("Thank you for your positive feedback!")
 
     # Negative feedback button (Thumbs Down)
     if st.button("👎", key="negative_feedback", help="Thumbs Down - Negative Feedback"):
-        save_feedback("negative")  # Save only "negative" to CSV
+        save_feedback(serial_no, user_input, bot_output, "negative")  # Save the data to CSV
         st.write("Sorry to hear that! We appreciate your feedback.")
 
     st.markdown('</div>', unsafe_allow_html=True)
+
